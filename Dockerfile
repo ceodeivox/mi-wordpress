@@ -8,9 +8,5 @@ RUN wget https://downloads.wordpress.org/plugin/amazon-s3-and-cloudfront.latest-
     && unzip /tmp/plugin.zip -d /usr/src/wordpress/wp-content/plugins/ \
     && rm /tmp/plugin.zip
 
-# Aumentar los límites de subida de PHP a 128MB
-RUN echo "file_uploads = On" >> /usr/local/etc/php/conf.d/uploads.ini \
-    && echo "upload_max_filesize = 128M" >> /usr/local/etc/php/conf.d/uploads.ini \
-    && echo "post_max_size = 128M" >> /usr/local/etc/php/conf.d/uploads.ini \
-    && echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/uploads.ini \
-    && echo "max_execution_time = 300" >> /usr/local/etc/php/conf.d/uploads.ini
+# Copiar la configuración personalizada de PHP al directorio oficial
+COPY uploads.ini $PHP_INI_DIR/conf.d/uploads.ini
