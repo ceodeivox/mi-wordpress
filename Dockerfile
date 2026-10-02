@@ -1,4 +1,4 @@
-FROM wordpress:php8.2-apache
+FROM wordpress:php8.3-apache
 
 # Instalar unzip y wget
 RUN apt-get update && apt-get install -y unzip wget && rm -rf /var/lib/apt/lists/*
