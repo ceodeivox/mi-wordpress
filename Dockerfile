@@ -1,3 +1,4 @@
+
 FROM wordpress:php8.3-apache
 
 # Instalar unzip y wget
@@ -5,6 +6,9 @@ RUN apt-get update && apt-get install -y unzip wget && rm -rf /var/lib/apt/lists
 
 # Copiar la configuración personalizada de PHP
 COPY uploads.ini $PHP_INI_DIR/conf.d/uploads.ini
+
+# Copiar la configuración personalizada de Apache para limitar la memoria RAM
+COPY mpm_prefork.conf /etc/apache2/mods-available/mpm_prefork.conf
 
 # Copiar y descomprimir los zips con sus nombres exactos
 COPY elementor-pro.zip /tmp/elementor-pro.zip
